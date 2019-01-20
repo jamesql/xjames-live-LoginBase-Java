@@ -2,11 +2,15 @@ package live.xjames.frame;
 
 import javax.swing.*;
 
+import live.xjames.methods.UserLogin;
+
 public class application {
 
 	private JFrame application;
+	private UserLogin details;
 	
-	public application() {
+	public application(UserLogin ul) {
+		detials = ul;
 		init();
 	}
 	
