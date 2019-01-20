@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import live.xjames.database.*;
+import live.xjames.frame.application;
+import live.xjames.frame.login;
 
 public class UserLogin {
 
@@ -20,23 +22,25 @@ public class UserLogin {
 	
 	private boolean loggedin = false;
 	
-	public UserLogin(boolean rem, String un, String p) {
+	public UserLogin(boolean rem, String un, String p, login screen) {
 		username = un;
 		password = p;
-		try{loggedin = checkLogin());}catch (SQLException e) {e.printStackTrace();}
-		System.out.println(password);
+		try{loggedin = checkLogin();}catch (SQLException e) {e.printStackTrace();}
 		
 		if (rem) {}
-		if (loggedin) {}
+		if (loggedin) {
+			screen.disappear();
+			application newapp = new application();
+		}
 		
 		
 		try {connection.close();} catch (SQLException ex) {ex.printStackTrace();}
 	}
 	
 	private boolean checkLogin() throws SQLException {
-		 PreparedStatement getName = connection.prepareStatement("SELECT userid FROM level WHERE userid=''"); 
+		 PreparedStatement getName = connection.prepareStatement("SELECT * FROM users WHERE username='" + username + "'"); 
 		 ResultSet res = getName.executeQuery();
-		 try{if(res.first()) return true;
+		 try{if(res.first() && res.getString("password").equals(password)) return true;
 			 else return false;
 		 } finally {}
 	}
