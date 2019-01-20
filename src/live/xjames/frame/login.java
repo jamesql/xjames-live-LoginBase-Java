@@ -5,14 +5,18 @@ import live.xjames.methods.UserLogin;
 import java.awt.event.*;
 import com.larry.sha256.*; 
 
-public class login implements ActionListener{
+public class login implements ActionListener {
 
 	private JFrame frame;
 	private JTextField userLogin;
 	private JPasswordField userPassword;
 	private JButton loginButton;
+	private JButton registerr;
 	private JCheckBox rememberMe;
+	@SuppressWarnings("unused")
 	private UserLogin ul;
+	@SuppressWarnings("unused")
+	private register rg;
 	
 	public login() {
 		init();
@@ -37,10 +41,14 @@ public class login implements ActionListener{
 		loginButton = new JButton("Login");
 		loginButton.setBounds(100, 150, 300, 60);
 		loginButton.addActionListener(this);
+		registerr = new JButton("Register");
+		registerr.setBounds(300, 220, 100, 60);
+		registerr.addActionListener(this);
 		
 		rememberMe = new JCheckBox("Remember Me");
 		rememberMe.setBounds(100, 220, 300, 30);
 		
+		frame.getContentPane().add(registerr);
 		frame.getContentPane().add(loginButton);
 		frame.getContentPane().add(rememberMe);
 		
@@ -55,6 +63,7 @@ public class login implements ActionListener{
 		frame.setVisible(false);
 	}
 	
+	@SuppressWarnings("deprecation")
 	private String hash() {
 		Hash hash = new Hash();
 		hash.newHash(userPassword.getText());
@@ -65,9 +74,14 @@ public class login implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		if (event.getSource().equals(loginButton)) {
-			if (rememberMe.isSelected()) ul = new UserLogin(true, userLogin.getText(), hash());
-			else ul = new UserLogin(false, userLogin.getText(), hash());
+			if (rememberMe.isSelected()) ul = new UserLogin(true, userLogin.getText(), hash(), this);
+			else ul = new UserLogin(false, userLogin.getText(), hash(), this);
 		}
+		
+		if (event.getSource().equals(registerr)) {
+			rg = new register();
+			rg.appear();
+		} 
 	}
 	
 }
