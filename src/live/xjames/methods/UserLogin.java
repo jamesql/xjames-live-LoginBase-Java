@@ -30,7 +30,8 @@ public class UserLogin {
 		if (rem) {}
 		if (loggedin) {
 			screen.disappear();
-			application newapp = new application();
+			// passing user login details for use in application
+			application newapp = new application(this);
 		}
 		
 		
