@@ -23,7 +23,7 @@ public class UserLogin {
 	public UserLogin(boolean rem, String un, String p) {
 		username = un;
 		password = p;
-		try{System.out.println(checkLogin());}catch (SQLException e) {e.printStackTrace();}
+		try{loggedin = checkLogin());}catch (SQLException e) {e.printStackTrace();}
 		System.out.println(password);
 		
 		if (rem) {}
