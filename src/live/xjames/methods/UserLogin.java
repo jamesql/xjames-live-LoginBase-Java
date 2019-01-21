@@ -22,12 +22,11 @@ public class UserLogin {
 	
 	private boolean loggedin = false;
 	
-	public UserLogin(boolean rem, String un, String p, login screen) {
+	public UserLogin(String un, String p, login screen) {
 		username = un;
 		password = p;
 		try{loggedin = checkLogin();}catch (SQLException e) {e.printStackTrace();}
 		
-		if (rem) {}
 		if (loggedin) {
 			screen.disappear();
 			// passing user login details for use in application
