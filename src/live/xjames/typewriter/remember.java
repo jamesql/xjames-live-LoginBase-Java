@@ -31,7 +31,7 @@ public class remember {
 	
 	private void writeMemory() {
 		try {log = new PrintWriter(text);} catch (FileNotFoundException e) {e.printStackTrace();}
-		log.print(un + ":" + pass);
+		log.print(un + "\n" + pass);
 		log.close();
 	}
 	
