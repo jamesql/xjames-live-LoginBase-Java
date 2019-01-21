@@ -2,6 +2,8 @@ package live.xjames.frame;
 
 import javax.swing.*;
 import live.xjames.methods.UserLogin;
+import live.xjames.typewriter.remember;
+
 import java.awt.event.*;
 import com.larry.sha256.*; 
 
@@ -15,7 +17,6 @@ public class login implements ActionListener {
 	private JCheckBox rememberMe;
 	@SuppressWarnings("unused")
 	private UserLogin ul;
-	@SuppressWarnings("unused")
 	private register rg;
 	
 	public login() {
@@ -74,8 +75,11 @@ public class login implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		if (event.getSource().equals(loginButton)) {
-			if (rememberMe.isSelected()) ul = new UserLogin(true, userLogin.getText(), hash(), this);
-			else ul = new UserLogin(false, userLogin.getText(), hash(), this);
+			if (rememberMe.isSelected()) {
+				remember rm = new remember(userLogin.getText(), userPassword.getText());
+				ul = new UserLogin(userLogin.getText(), hash(), this);
+			}
+			else ul = new UserLogin(userLogin.getText(), hash(), this);
 		}
 		
 		if (event.getSource().equals(registerr)) {
