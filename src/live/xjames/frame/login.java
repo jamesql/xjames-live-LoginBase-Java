@@ -4,11 +4,16 @@ import javax.swing.*;
 import live.xjames.methods.UserLogin;
 import live.xjames.typewriter.remember;
 
+import java.io.*;
+import java.util.Scanner;
+
 import java.awt.event.*;
 import com.larry.sha256.*; 
 
 public class login implements ActionListener {
 
+	
+	private String fileDir = "tmp.txt";
 	private JFrame frame;
 	private JTextField userLogin;
 	private JPasswordField userPassword;
@@ -19,13 +24,15 @@ public class login implements ActionListener {
 	private UserLogin ul;
 	private register rg;
 	
+	private File details = new File(fileDir);
+	
 	public login() {
-		init();
+		try{init();}catch(FileNotFoundException e){e.printStackTrace();}
 	}
 	
 	
 	// Init Frame
-	public void init() {
+	public void init() throws FileNotFoundException {
 		frame = new JFrame("SendIt - Login");
 		frame.setBounds(50, 50, 500, 400);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -48,6 +55,12 @@ public class login implements ActionListener {
 		
 		rememberMe = new JCheckBox("Remember Me");
 		rememberMe.setBounds(100, 220, 300, 30);
+		
+		if (details.exists()) {
+			Scanner s = new Scanner(details);
+			userLogin.setText(s.next());
+			userPassword.setText(s.next());
+		}
 		
 		frame.getContentPane().add(registerr);
 		frame.getContentPane().add(loginButton);
